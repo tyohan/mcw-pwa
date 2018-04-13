@@ -49,7 +49,6 @@ MCW_PWA_Assets::instance();
 //MCW_PWA_Add_Homescreen::instance();
 //MCW_PWA_Performance::instance();
 
-register_deactivation_hook( __FILE__, array(MCW_PWA_Service_Worker::instance(),'flushRewriteRules' ));
 register_deactivation_hook(__FILE__,'deactivate');
 register_activation_hook( __FILE__, 'activate' );
 register_uninstall_hook( __FILE__, 'uninstall' );
