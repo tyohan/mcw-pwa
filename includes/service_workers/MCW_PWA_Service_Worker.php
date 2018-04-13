@@ -97,6 +97,10 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module{
     public function activate(){
         $this->scanAndAddAssets(true);
     }
+    
+    public function deactivate(){
+        flush_rewrite_rules();
+    }
 
     public function uninstall(){
         delete_option($this->getKey());
@@ -117,6 +121,26 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module{
                 navigator.serviceWorker.register(\''.$this->getSWUrl().'\');
             });
             
+            document.onclick = function(event) {
+                event = event || window.event; // IE specials
+                var target = event.target || event.srcElement; // IE specials
+            
+                if(target.nodeName === "A") {
+                    const pageUrl=event.target.getAttribute(\'href\');
+                    if(pageUrl!==null){
+                        fetchPage(pageUrl);
+                        event.preventDefault();
+                    }
+                }
+            };
+
+            
+            function fetchPage(url){
+                const pageUrl=new URL(url);
+                pageUrl.searchParams.append(\'mwcpwa_partial\', 1);
+                return fetch(pageUrl)
+                  .then(response => response.body);
+            }
             
             })();
         </script>';

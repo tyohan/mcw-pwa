@@ -1,18 +1,22 @@
 ### Minimum Configuration WordPress PWA Plugin
 
 ## Overview
-This plugin is developed to focus on enhancing the loading experiences with minimum configuration. 
+This plugin is developed to focus on enhancing the loading experiences with minimum configuration.
 
 The plugin's current features:
 * use service worker to cache all static assets like images, JavaScripts, CSS styles, and fonts. It use [Workbox](https://developers.google.com/web/tools/workbox/) as a library.
 * use Intersection Observer API to lazy load images on page.
 * make scripts loaded with async if no dependency found and defer if it has dependency like jQuery library. **This is a bit risky if themes or plugins not include the scripts with wp_enqueue_script function or not include dependency when they enqueue the script. Make sure you check there is no error on JavaScript console when you activate the plugin.**
-* install service worker if the website has AMP plugin running. AMP is a custom elements library that boost the website loading performance.
+* install service worker on AMP page if the website has AMP plugin running. AMP is a custom elements library that boost the website loading performance.
+* add offline page to show when user offline. 
+* scan and set static URLs to precache
 
-**This is still in beta, so please don't put it in productions until you know what you're doing.**
+## To Develop
+* Select page to precache
+* Notificaton on offline connection
 
 ## Setup For Development
-To install the plugin follow the steps
+To install the plugin follow the steps. Follow this [steps](https://ben.lobaugh.net/blog/147853/creating-a-two-way-sync-between-a-github-repository-and-subversion) to work on git svn syncronize repo.
 
 1. Clone the repo to a directory inside your `wp-content/plugins` directory by running command in your terminal `git clone https://github.com/tyohan/mcw-pwa.git mcw-pwa`
 2. Install NPM first because we need it to install Workbox library
