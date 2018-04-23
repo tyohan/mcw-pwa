@@ -36,7 +36,6 @@ define('MCW_PWA_SETTING_PAGE','mcw_setting_page');
 
 require_once(MCW_PWA_DIR . 'vendor/autoload.php');
 require_once(MCW_PWA_DIR.'includes/service_workers/MCW_PWA_Service_Worker.php');
-//require_once(MCW_PWA_DIR.'includes/performance/MCW_PWA_Performance.php');
 require_once(MCW_PWA_DIR.'includes/MCW_PWA_Settings.php');
 require_once(MCW_PWA_DIR.'includes/MCW_PWA_LazyLoad.php');
 require_once(MCW_PWA_DIR.'includes/MCW_PWA_Assets.php');
@@ -45,7 +44,6 @@ MCW_PWA_Settings::instance();
 MCW_PWA_Service_Worker::instance();
 MCW_PWA_LazyLoad::instance();
 MCW_PWA_Assets::instance();
-//MCW_PWA_Performance::instance();
 
 register_deactivation_hook(__FILE__,'deactivate');
 register_activation_hook( __FILE__, 'activate' );
@@ -59,14 +57,12 @@ function deactivate(){
     MCW_PWA_Service_Worker::instance()->deactivate();
     MCW_PWA_LazyLoad::instance()->deactivate();
     MCW_PWA_Assets::instance()->deactivate();
-    //MCW_PWA_Performance::instance()->deactivate();
 }
 
 function uninstall(){
     MCW_PWA_Service_Worker::instance()->uninstall();
     MCW_PWA_LazyLoad::instance()->uninstall();
     MCW_PWA_Assets::instance()->uninstall();
-    //MCW_PWA_Performance::instance()->uninstall();
 }
 
 add_action('parse_query','mcw_init');
@@ -81,9 +77,7 @@ function mcw_init(){
         // use AMPFORWP_AMP_QUERY_VAR
         if(defined('AMP_QUERY_VAR') && !get_query_var( AMP_QUERY_VAR, false )){
                 MCW_PWA_LazyLoad::instance()->run();
-                //MCW_PWA_Performance::instance()->run();
                 MCW_PWA_Assets::instance()->run();
-            
         }
     }    
 }
