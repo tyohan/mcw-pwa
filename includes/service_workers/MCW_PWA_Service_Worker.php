@@ -28,8 +28,9 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 			self::$__instance = new MCW_PWA_Service_Worker();
 		}
 
-				return self::$__instance;
+		return self::$__instance;
 	}
+
 	protected function __construct() {
 		parent::__construct();
 		if ( $this->isEnable() ) {
@@ -62,7 +63,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 			)
 		);
 
-				// Add the field with the names and function to use for our new
+		// Add the field with the names and function to use for our new
 		// settings, put it in our new section
 		add_settings_field(
 			$this->getKey(),
@@ -75,6 +76,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 
 	public function registerQueryVar( $vars ) {
 		$vars[] = MCW_SW_QUERY_VAR;
+
 		return $vars;
 	}
 
@@ -147,14 +149,14 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
                 workbox.routing.registerRoute(matcher, handler);\n";
 			}
 
-						echo file_get_contents( MCW_PWA_DIR . 'scripts/sw.js' );
+			echo file_get_contents( MCW_PWA_DIR . 'scripts/sw.js' );
 			exit;
 		}
 	}
 
 	protected function getPrecachesString() {
 		return array_map(
-			function( $file ) {
+			function ( $file ) {
 				return "'" . $file . "'";
 			}, $this->getAllPrecaches()
 		);
@@ -164,8 +166,10 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 		if ( $this->_precaches === null ) {
 			$this->_precaches = get_option( MCW_PWA_SW_PRECACHES, [] );
 		}
+
 		return $this->_precaches;
 	}
+
 	public function getAllPrecaches() {
 		$preaches = $this->getPrecaches();
 		// if(MCW_PWA_Performance::instance()->isEnable()){
@@ -193,6 +197,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 				}
 			}
 		}
+
 		return $assets;
 	}
 
@@ -209,6 +214,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 	public function addPrecache( $url ) {
 		if ( ( $key = array_search( $url, $this->getPrecaches() ) ) === false ) {
 			$this->_precaches[] = $url;
+
 			return true;
 		} else {
 			return false;
@@ -222,6 +228,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 				$this->_assets = [];
 			}
 		}
+
 		return $this->_assets;
 	}
 
@@ -229,7 +236,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 		$request = wp_remote_get( str_replace( 'localhost', $_SERVER['REMOTE_ADDR'], home_url() ) );
 		$html    = wp_remote_retrieve_body( $request );
 
-				preg_match_all( '/<link\s*.+href=[\'|"]([^\'|"]+\.css?.+)[\'|"](.+)>/iU', $html, $css_match );
+		preg_match_all( '/<link\s*.+href=[\'|"]([^\'|"]+\.css?.+)[\'|"](.+)>/iU', $html, $css_match );
 		preg_match_all( '#<script[^>]+?src=[\'|"]([^\'|"]+\.js?.+)[\'|"].*>(?:<\/script>)#iU', $html, $js_match );
 
 		return array_merge( $css_match[1], $js_match[1] );
@@ -238,6 +245,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 	public function addAsset( $url ) {
 		if ( ( $key = array_search( $url, $this->getPrecaches() ) ) === false && ( $key = array_search( $url, $this->getAssets() ) ) === false ) {
 			$this->_assets[] = $url;
+
 			return true;
 		} else {
 			return false;
@@ -258,6 +266,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 			}
 		}
 	}
+
 	public function getOfflinePage() {
 		return get_option( MCW_OFFLINE_PAGE, null );
 	}
@@ -287,7 +296,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 			echo '<div class="error">
                 <p>Sorry, your nonce was not correct. Please try again.</p>
                 </div>';
-				exit;
+			exit;
 		} else {
 
 			if ( ! empty( $_POST['mcw_offline_page'] ) ) {
@@ -303,7 +312,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 			echo '<div class="error">
                 <p>Sorry, your nonce was not correct. Please try again.</p>
                 </div>';
-				exit;
+			exit;
 		} else {
 			//save assets by default then add
 			$assets           = $_POST['mcw_assets'];
