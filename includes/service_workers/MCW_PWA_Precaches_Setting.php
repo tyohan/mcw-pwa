@@ -30,41 +30,43 @@
     <form method="POST">
         <h4>1. Click button below to scan your website and detect all statics assets that can be precaches</h4>
         <input type="hidden" name="mcw_action" value="scan"/>
-        <?php submit_button('Scan Static Assets');?>
-    </form>
+        <?php submit_button( 'Scan Static Assets' ); ?>
+	</form>
 </div>
 <div id="add-precache">
-    <h4>2. Add manually your static assets url if some static assets can't be scanned</h4>
-    <input type="text" id="new-precache" size="50"/> <button class="button-primary" onclick="addPrecache()">Add Precache</button>
+	<h4>2. Add manually your static assets url if some static assets can't be scanned</h4>
+	<input type="text" id="new-precache" size="50"/> <button class="button-primary" onclick="addPrecache()">Add Precache</button>
 </div>
 
 <div id="preaches-container">
 <form method="POST">
-<?php wp_nonce_field('mcw_precaches_update');?>
+<?php wp_nonce_field( 'mcw_precaches_update' ); ?>
 <h4>3. Manage your static assets below, check that you want to precache.</h4>
 <p class="description">Check files below that you want to enable as precaches assets. Unchecked files will not precaches.</p>
 <ul id="precaches-list">
-    <li><input type="checkbox" value="select_all" onclick="selectAllCaches(this)"/> <strong style="font-size:1.2em;">Select All Preaches</strong></li>
+	<li><input type="checkbox" value="select_all" onclick="selectAllCaches(this)"/> <strong style="font-size:1.2em;">Select All Preaches</strong></li>
 <?php
-    $precaches = MCW_PWA_Service_Worker::instance()->getPrecaches();
-    foreach ($precaches as $key => $precache):?>
-        <li>
-            <input type="checkbox" name="mcw_precaches[]" class="precaches" value="<?php echo $precache;?>" checked/> <?php echo $precache;?> <a href="javascript:void(0);" onclick="removeAsset(this)">Remove</a>
-            <input type="hidden" name="mcw_assets[]" class="assets" value="<?php echo $precache;?>"/>
-        </li>
-    <?php endforeach;?>
-<?php 
-    $assets=MCW_PWA_Service_Worker::instance()->getAssets();
-    if(is_array($assets)):
-    foreach ($assets as $key => $precache):?>
-        <li>
-            <input type="checkbox" name="mcw_precaches[]" class="precaches" value="<?php echo $precache;?>"/> <?php echo $precache;?> <a href="javascript:void(0);" onclick="removeAsset(this)">Remove</a>
-            <input type="hidden" name="mcw_assets[]" class="assets" value="<?php echo $precache;?>"/>
-        </li>
-    <?php endforeach;?>
-<?php endif;?>
+	$precaches = MCW_PWA_Service_Worker::instance()->getPrecaches();
+foreach ( $precaches as $key => $precache ) :
+	?>
+		<li>
+			<input type="checkbox" name="mcw_precaches[]" class="precaches" value="<?php echo $precache; ?>" checked/> <?php echo $precache; ?> <a href="javascript:void(0);" onclick="removeAsset(this)">Remove</a>
+			<input type="hidden" name="mcw_assets[]" class="assets" value="<?php echo $precache; ?>"/>
+		</li>
+	<?php endforeach; ?>
+<?php
+	$assets = MCW_PWA_Service_Worker::instance()->getAssets();
+if ( is_array( $assets ) ) :
+	foreach ( $assets as $key => $precache ) :
+	?>
+		<li>
+			<input type="checkbox" name="mcw_precaches[]" class="precaches" value="<?php echo $precache; ?>"/> <?php echo $precache; ?> <a href="javascript:void(0);" onclick="removeAsset(this)">Remove</a>
+			<input type="hidden" name="mcw_assets[]" class="assets" value="<?php echo $precache; ?>"/>
+		</li>
+	<?php endforeach; ?>
+<?php endif; ?>
 </ul>
-<?php submit_button('Update Precaches');?>
+<?php submit_button( 'Update Precaches' ); ?>
 </form>
 </div>
 

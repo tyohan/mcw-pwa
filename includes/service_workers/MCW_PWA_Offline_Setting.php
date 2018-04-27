@@ -6,12 +6,18 @@
 
 <div id="preaches-container">
 <form method="POST">
-<?php wp_nonce_field('mcw_offline');?>
-<p>Show this page on offline mode <?php wp_dropdown_pages( [
-    'name'=>'mcw_offline_page',
-    'show_option_none'=>'No offline page',
-    'selected'=>MCW_PWA_Service_Worker::instance()->getOfflinePage()
-    ] ); ?></p>
-<?php submit_button('Set Offline Page');?>
+<?php wp_nonce_field( 'mcw_offline' ); ?>
+<p>Show this page on offline mode 
+<?php
+wp_dropdown_pages(
+	[
+		'name'             => 'mcw_offline_page',
+		'show_option_none' => 'No offline page',
+		'selected'         => MCW_PWA_Service_Worker::instance()->getOfflinePage(),
+	]
+);
+	?>
+	</p>
+<?php submit_button( 'Set Offline Page' ); ?>
 </form>
 </div>
