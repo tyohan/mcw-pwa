@@ -97,7 +97,7 @@ class MCW_PWA_Monitor extends MCW_PWA_Module {
                     ga("send", {
                         hitType: "timing",
                         timingCategory: "Load Performance",
-                        timingLabel:currentPage
+                        timingLabel:currentPage,
                         timingVar: "timetointeractive",
                         timingValue: tti
                     });
