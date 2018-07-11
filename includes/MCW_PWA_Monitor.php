@@ -60,29 +60,29 @@ class MCW_PWA_Monitor extends MCW_PWA_Module {
           
           !function(){if("PerformanceLongTaskTiming" in window){var g=window.__tti={e:[]};
             g.o=new PerformanceObserver(function(l){g.e=g.e.concat(l.getEntries())});
-            g.o.observe({entryTypes:["longtask"]})}}(); 
+            g.o.observe({entryTypes:["longtask"]})} 
             
+            window._performanceMetrics=[];
+
             const observer = new PerformanceObserver((list) => {
                 const currentPage=document.querySelector("title").text;
                 for (const entry of list.getEntries()) {
                   const metricName = entry.name;
                   const time = Math.round(entry.startTime + entry.duration);
                   
-                  //console.log(`Time for ${currentPage} on ${metricName} : ${time/1000}s`);
-                  if(typeof ga !=="undefined"){
-                    ga("send", {
+                  _performanceMetrics.push({
                         hitType: "timing",
                         timingCategory: "Load Performance",
                         timingVar: metricName,
-                        timingValue: tti,
+                        timingValue: time,
                         timingLabel:currentPage
                     });
-                  }
                 }
               });
               
               // Start observing paint entries.
               observer.observe({entryTypes: ["paint"]});
+            }(); 
           </script>
           ';
     }
@@ -93,15 +93,21 @@ class MCW_PWA_Monitor extends MCW_PWA_Module {
             ttiPolyfill.getFirstConsistentlyInteractive().then((tti) => {
                 const currentPage=document.querySelector("title").text;
                 //console.log(`TTI for ${currentPage}: ${tti/1000} s`);
+                _performanceMetrics.push({
+                    hitType: "timing",
+                    timingCategory: "Load Performance",
+                    timingLabel:currentPage,
+                    timingVar: "time-to-interactive",
+                    timingValue: tti
+                });
+
                 if(typeof ga !=="undefined"){
-                    ga("send", {
-                        hitType: "timing",
-                        timingCategory: "Load Performance",
-                        timingLabel:currentPage,
-                        timingVar: "timetointeractive",
-                        timingValue: tti
+                    _performanceMetrics.forEach((metric) =>{
+                        //console.log(`Time for ${metric.timingVar}  : ${metric.timingValue/1000}s`);
+                        ga("send", metric); 
                     });
                 }
+                
               });
         </script>';
         
