@@ -10,6 +10,7 @@ The plugin's current features:
 * install service worker on AMP page if the website has AMP plugin running. AMP is a custom elements library that boost the website loading performance.
 * add offline page to show when user offline. 
 * scan and set static URLs to precache
+* Integrated loading performance monitoring with Google Analytics. If you have Google Analytics, it will track page load [user performance metric](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics) to your Google Analytics using [user timings report](https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings).
 
 ## To Develop
 * Select page to precache
@@ -18,7 +19,7 @@ The plugin's current features:
 ## Setup For Development
 To install the plugin follow the steps. Follow this [steps](https://ben.lobaugh.net/blog/147853/creating-a-two-way-sync-between-a-github-repository-and-subversion) to work on git svn syncronize repo.
 
-1. Clone the repo to a directory inside your `wp-content/plugins` directory by running command in your terminal `git clone https://github.com/tyohan/mcw-pwa.git mcw-pwa`
+1. Clone the repo to a directory inside your `wp-content/plugins` directory by running command in your terminal `git clone https://github.com/wp-id/mcw-pwa.git mcw-pwa`
 2. Install NPM first because we need it to install Workbox library
 3. Switch your terminal working directory to `mcw-pwa/scripts` and run command `npm install` to install the WorkBox library.
 4. Activate the plugin inside your WordPress Admin Panel on plugin section.

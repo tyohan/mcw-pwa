@@ -3,7 +3,7 @@
 Plugin Name:  Minimum Configuration WordPress PWA
 Plugin URI:   https://github.com/tyohan/mcw-pwa
 Description:  WordPress plugin to optimize loading performance with minimum configuration using PWA approach
-Version:      0.1.5
+Version:      0.1.6
 Author:       Yohan Totting
 Author URI:   https://tyohan.me
 License:      GPL2
@@ -38,11 +38,13 @@ require_once( MCW_PWA_DIR . 'includes/service_workers/MCW_PWA_Service_Worker.php
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Settings.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_LazyLoad.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Assets.php' );
+require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Monitor.php' );
 
 MCW_PWA_Settings::instance();
 MCW_PWA_Service_Worker::instance();
 MCW_PWA_LazyLoad::instance();
 MCW_PWA_Assets::instance();
+MCW_PWA_Monitor::instance();
 
 register_deactivation_hook( __FILE__, 'deactivate' );
 register_activation_hook( __FILE__, 'activate' );
@@ -70,13 +72,18 @@ function mcw_init() {
 	if ( ! is_admin() ) {
 
 		MCW_PWA_Service_Worker::instance()->run();
-
+		
 		//Disable some performance enhancement on AMP
 		//Try to support AMP for WP plugin https://github.com/ahmedkaludi/Accelerated-Mobile-Pages
 		// use AMPFORWP_AMP_QUERY_VAR
 		if ( defined( 'AMP_QUERY_VAR' ) && ! get_query_var( AMP_QUERY_VAR, false ) ) {
 				MCW_PWA_LazyLoad::instance()->run();
 				MCW_PWA_Assets::instance()->run();
+				
 		}
 	}
+
+	MCW_PWA_Monitor::instance()->run();
 }
+
+
