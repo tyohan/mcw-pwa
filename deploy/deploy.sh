@@ -20,7 +20,8 @@ rm .travis.yml
 # 6. Go to SVN repository root
 cd ../
 
-# 7. Create SVN tag
+# 7. Add new files and create SVN tag
+svn add trunk/* --force
 svn cp trunk tags/$TRAVIS_TAG
 
 # 8. Push SVN tag
