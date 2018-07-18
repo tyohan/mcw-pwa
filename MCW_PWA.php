@@ -1,16 +1,17 @@
 <?php
 /*
+Contributors: tyohan,ivankristianto
 Plugin Name:  Minimum Configuration WordPress PWA
-Plugin URI:   https://github.com/tyohan/mcw-pwa
+Plugin URI:   https://github.com/wp-id/mcw-pwa
 Description:  WordPress plugin to optimize loading performance with minimum configuration using PWA approach
-Version:      0.1.7
-Author:       Yohan Totting
-Author URI:   https://tyohan.me
+Version:      0.1.8
+Author:       WP-ID
+Author URI:   https://wp-id.org/
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  mcwpwa
 Domain Path:  /languages
-Contributors: tyohan,ivankristianto
+
 Minimum Configuration WordPress PWA is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
