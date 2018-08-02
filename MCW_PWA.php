@@ -1,11 +1,12 @@
 <?php
 /*
+Contributors: tyohan,ivankristianto
 Plugin Name:  Minimum Configuration WordPress PWA
-Plugin URI:   https://github.com/tyohan/mcw-pwa
+Plugin URI:   https://github.com/wp-id/mcw-pwa
 Description:  WordPress plugin to optimize loading performance with minimum configuration using PWA approach
-Version:      0.1.6
-Author:       Yohan Totting
-Author URI:   https://tyohan.me
+Version:      0.1.9
+Author:       WP-ID
+Author URI:   https://wp-id.org
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  mcwpwa
@@ -33,7 +34,7 @@ define( 'MCW_SECTION_PERFORMANCE', 'mcw_option_performance' );
 define( 'MCW_SECTION_PWA', 'mcw_option_pwa' );
 define( 'MCW_PWA_SETTING_PAGE', 'mcw_setting_page' );
 
-require_once( MCW_PWA_DIR . 'vendor/autoload.php' );
+//require_once( MCW_PWA_DIR . 'vendor/autoload.php' );
 require_once( MCW_PWA_DIR . 'includes/service_workers/MCW_PWA_Service_Worker.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Settings.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_LazyLoad.php' );

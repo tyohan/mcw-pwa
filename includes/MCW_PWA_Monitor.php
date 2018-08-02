@@ -1,4 +1,9 @@
 <?php
+/*
+ * Monitoring performance and report First Paint, First Contentful Paint, and Time To Interactive if Google Analytics is available.
+ * @since 0.1.7
+ */ 
+
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Module.php' );
 
 class MCW_PWA_Monitor extends MCW_PWA_Module {

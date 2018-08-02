@@ -1,0 +1,18 @@
+language: php
+php:
+- 7.0
+script:
+- php -l *.php
+branches:
+  only:
+  - "/\\d\\.\\d\\.\\d/"
+deploy:
+  provider: script
+  script: deploy/deploy.sh
+  on:
+    tags: true
+env:
+  global:
+  - SVN_REPOSITORY=https://plugins.svn.wordpress.org/mcw-pwa/
+  - secure: JpRKyByFnRQBJtP7OGlQeDTfaP6Jlcwc6FaaiyjT/SFoC3zkk+r9pDKQ2VnYp7tdwp/NOZ4bFWqOBsn51dgF+gGFheBInVUNVnd+cD7yHnSmsFHE3Y74a1X0fDrpydHVyOtCDc7lWmwNjKElq+/QnWyoo/2hCg1ekIlAKDcFRkWjcDGFC3/ITT6mJDHub5oPglULxxpqMmphDVMdg1UR5ZCM9p89BPEgtAwBYTtC+ufILahSRUhYU9En331O8DJHETQL89UghSrfmZn9dflxnDbyTcYRXWdTN7IqECW2KXuXcr8LWrsW2ZgLuo/yCp1+/PjArWqekkTwBtYdemWXK07JY5DM4pRLiYzIQ2rz7WHLk6nc5oH901HXSqIR/DyG+r/wqHQFoXuBngD8HaEBhydtVdaBs2zwrR9lMenLJY+kVYEMmGU1+UroFuDmSPuNtehUgzxnNZfR6xSp+NLk5UkOYL1Y9uXhn/70gk4dW1t+t1XiohuvLXSUes0GyPsAlyWKpjLhhhVBo/Nw8jbR46APHXzhrwIw/XmctOstA0qmDcU+vYEoVqz7stVnZCPb22+fK/Fq7+bfAy6tF33EqhY+vPU2mHlyx+xy5Rr4Yg+wWClCm0ubidbt0ytv373RdIR1TsKATY2ECtYVhcgRgu6wLBai+/SNkkNzx0Z/HtM=
+  - secure: C80XHIVU17wKkhjZ8xIfLrJcoySH2AyWqbL9+JkzjQf0Iku+9+4mrWlUXz2RRGM0iVEmxy0obCqwgeHnhuJ3B9u6ZBczqPxYNAzgkw/BIt9NZAGYAHkmwmeXBlYfQ9yiHyr2rR/77cwLl17I52VD42CrzxMDsZcVymAj3yx/yYaVdfQpJ7qMU7S85RDtt3SQX4qDangUv38+lwnILpStowNM0LMvDZah76PBWB02LJiYHyDLZpfcxVJT1Nt+wh655yXV9K8KiQMPGu2orxFILS/xojmvxTxtb4+aIMBeIXMEm4U+Wtx8hZnloZH94cjuvG9ec99gMkTpiYITaanBNbdT8gCRVA66YP2/H/aQXuL6hdkAcwQPX1G1AETe8m9qkWl3khXroWkmhOBTcF5zVxQdquIRBIXkORJQLUup2w1swEPl46W6H+8WZ8X4gGn7grUxIg3Xi9+5bXMOFxFFPbfiINd3OqarB54g3M6w4Cw7p3NM06nTbtaMziGy6emMZFgNVEEzTjz8WLTQW9ZYEpqXZ7iWRg6RQQM3B4hkIYxouaQv7R1zLoxLnI9n5TeTsGyEqXJ8TgUEu7S51SF/eneORxoTBXZoMBqC7NjCio9gN80LF5XZlfQDOt3Hk/MRPTFv82DyJFj8ETnVoV5hrPgzzoI/uWFwEmOdcK0D3J4=
