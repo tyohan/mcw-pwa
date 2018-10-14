@@ -3,7 +3,13 @@
 abstract class MCW_PWA_Module {
 	protected $_enable_by_default = true;
 
+	protected $_errorMessage = '';
+
 	abstract public function getKey();
+
+	abstract function settingsApiInit();
+
+	abstract function initScript();
 
 	public function settingSanitize( $input ) {
 
@@ -16,16 +22,8 @@ abstract class MCW_PWA_Module {
 
 	public function run() {
 		if ( $this->isEnable() ) {
-			$this->initScripts();
+			$this->initScript();
 		}
-	}
-
-	protected function settingsApiInit() {
-
-	}
-
-	public function initScript() {
-		//won't do anything unless override
 	}
 
 	public function settingCallback() {

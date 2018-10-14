@@ -45,7 +45,7 @@ class MCW_PWA_Service_Worker extends MCW_PWA_Module {
 		return 'mcw_enable_service_workers';
 	}
 
-	public function initScripts() {
+	public function initScript() {
 		add_action( 'wp_print_footer_scripts', array( $this, 'registerSW' ), 1000 );
 		//amp support
 		add_action( 'amp_post_template_head', array( $this, 'renderAMPSWScript' ) );

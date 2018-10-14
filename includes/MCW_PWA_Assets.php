@@ -23,7 +23,7 @@ class MCW_PWA_Assets extends MCW_PWA_Module {
 		return 'mcw_enable_assets';
 	}
 
-	public function initScripts() {
+	public function initScript() {
 		if ( ! is_admin() ) {
 			add_filter( 'script_loader_tag', array( $this, 'addDeferAsyncAttribute' ), 10, 2 );
 			// Remove WP Version From Styles
