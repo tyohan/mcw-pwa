@@ -1,0 +1,27 @@
+language: php
+
+php:
+- 7.0
+
+script:
+- php -l *.php
+
+branches:
+  only:
+  - master
+  - develop
+  - "/\\d\\.\\d\\.\\d/"
+
+deploy:
+  provider: script
+  script: deploy/deploy.sh
+  on:
+    php: 7.0
+    tags: true
+    repo: wp-id/mcw-pwa
+
+env:
+  global:
+  - SVN_REPOSITORY=https://plugins.svn.wordpress.org/mcw-pwa/
+  - secure: w6Mqoh+puRpckKOl8HLNCuEpe0eWBk1c01wDuBtaUiRfNXeoAB0mu4ubSQlRGKgWU8opRcH8K/l9Wv9xJa025l3vV5wdz7Y+g128zUTvTaCAbkRo9ygNgrhjH48hvUseMrwvvl1nj/zvm0BJCkCdYxGLQZovIgIzOCnnr399jZZm6xs1JHcnXV/8mDF6tGCeGGmMAzoqyWflsiS3kBEul2/StoPZKlaWvEfHg0hncP2NsMsZVYG/r/Sa/Jc4vGqvXTMAxFRvDsJqw4vBhoOKhk8xxaPM0GAThwNgR6CD+1+B+aQUfMustNt3oMN8rn4/c+VZPeeSLiXuKIfjSQkScIbYwbzQ88ceTz50C7wGBmuUYhzYIAexTjfzWsGjovQYhfn0QeHIBqiFCE5d2yzm1eGKGj6AWAJDRseOc03iB1FJqhfNfoGXq7UZFr8xUnmGbNSd21/efpDC4y2APCw8zURrSMuITMPin58WXiKzZaz2ETh5IOX2pzKxQjoIzsbqgqyLHW/4YJsjWECEPjeCxloUeq/t8K5feE0LDTcPdbOIm5DRT4rek1BGAbqofw7qWvTfh+SBFJU3fJrsBuhw9gAtzs4FrHp/y1RnwS7zaLBhy0Or9MDAMjBgRkBNCxmvwq7XPDpS52plvzqeIoo+8apYl+TCumbF/Xaq2DlADTE=
+  - secure: DMDkrzNew6WuunIGShGOBqeRvW6j2q/T3g5PWP4ndlOf6QLYapaGTqFqu48xwooZKqPxn10Uby+pxFX7t6VH/ig3OkRp6FOgOxEUVsPpVQB0akt69TvHbfReB+dVzlID/IUUi8Ji5U2I2FDjA5mr5HcAvX1r+indlY31suIQPj3LL3Tun79EjEN7bCG6CpPer5T8uNL60LHQdrrM9j8kmuWXUDlVGLIHf7Ag80d0Vt7WuL9Hv1+DlAp7w5rm3RDlcBt6WFNxdfq+W/dcMPIGymyvIxd9/xXaM6I/qNc76YCg4XTfyiNH9QNuEGtP/WDltXDLAUWbBB82eaqM0wtENOw0bJD0mb/4SBCYGBlvydMdk4Rfh1X2ch5ZINpHa7dklbIO5WBpdAq2t/zEYU8jshQoIeO6+uki3orUVeh9Gql3VIjDkmZ0agQW9H3iOuc/2K3H0CSkK5fvCZpRUEZeFAevAknZGWVbrYniNN7pkT9W5DOkIc7nwEPqG4PwC5jdZusy5i7TX6coHp3LHdr7ir7W4TIx+n8FXXr/iRq0TdVxtyBxIy9EobLov/TmoTAnx4QXk5hFYpLF7O+XlA/tK9vkl7YOtaQzHdaBiN203GpJmDjXPXFt/pyCuLhVj08a23zdoQytKj3a7sPGqg3W8druLENoW7yurCE/uzHU/cg=

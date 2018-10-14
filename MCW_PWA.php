@@ -1,11 +1,12 @@
 <?php
 /*
+Contributors: tyohan,ivankristianto
 Plugin Name:  Minimum Configuration WordPress PWA
-Plugin URI:   https://github.com/tyohan/mcw-pwa
+Plugin URI:   https://github.com/wp-id/mcw-pwa
 Description:  WordPress plugin to optimize loading performance with minimum configuration using PWA approach
-Version:      0.1.7
-Author:       Yohan Totting
-Author URI:   https://tyohan.me
+Version:      0.2.0
+Author:       WP-ID
+Author URI:   https://wp-id.org
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  mcwpwa
@@ -33,12 +34,20 @@ define( 'MCW_SECTION_PERFORMANCE', 'mcw_option_performance' );
 define( 'MCW_SECTION_PWA', 'mcw_option_pwa' );
 define( 'MCW_PWA_SETTING_PAGE', 'mcw_setting_page' );
 
+<<<<<<< HEAD
 require_once( MCW_PWA_DIR . 'vendor/autoload.php' );
 require_once( MCW_PWA_DIR . 'includes/service_workers/MCW_PWA_Service_Worker.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Settings.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_LazyLoad.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Assets.php' );
 require_once( MCW_PWA_DIR . 'includes/MCW_PWA_Monitor.php' );
+=======
+require_once MCW_PWA_DIR . 'includes/service_workers/MCW_PWA_Service_Worker.php';
+require_once MCW_PWA_DIR . 'includes/MCW_PWA_Settings.php';
+require_once MCW_PWA_DIR . 'includes/MCW_PWA_LazyLoad.php';
+require_once MCW_PWA_DIR . 'includes/MCW_PWA_Assets.php';
+require_once MCW_PWA_DIR . 'includes/MCW_PWA_Monitor.php';
+>>>>>>> b293fb5359f015a3e604d9cf952b1ba32b51ba90
 
 MCW_PWA_Settings::instance();
 MCW_PWA_Service_Worker::instance();
@@ -46,32 +55,42 @@ MCW_PWA_LazyLoad::instance();
 MCW_PWA_Assets::instance();
 MCW_PWA_Monitor::instance();
 
-register_deactivation_hook( __FILE__, 'deactivate' );
-register_activation_hook( __FILE__, 'activate' );
-register_uninstall_hook( __FILE__, 'uninstall' );
-
+/**
+ * Run when plugin activate
+ */
 function activate() {
 	MCW_PWA_Service_Worker::instance()->activate();
 }
+register_activation_hook( __FILE__, 'activate' );
 
+/**
+ * Run when plugin deactivate
+ */
 function deactivate() {
 	MCW_PWA_Service_Worker::instance()->deactivate();
 	MCW_PWA_LazyLoad::instance()->deactivate();
 	MCW_PWA_Assets::instance()->deactivate();
 }
+register_deactivation_hook( __FILE__, 'deactivate' );
 
+/**
+ * Run when plugin uninstall
+ */
 function uninstall() {
 	MCW_PWA_Service_Worker::instance()->uninstall();
 	MCW_PWA_LazyLoad::instance()->uninstall();
 	MCW_PWA_Assets::instance()->uninstall();
 }
+register_uninstall_hook( __FILE__, 'uninstall' );
 
-add_action( 'parse_query', 'mcw_init' );
-
+/**
+ * Run Service worker.
+ */
 function mcw_init() {
 	if ( ! is_admin() ) {
 
 		MCW_PWA_Service_Worker::instance()->run();
+<<<<<<< HEAD
 		
 		//Disable some performance enhancement on AMP
 		//Try to support AMP for WP plugin https://github.com/ahmedkaludi/Accelerated-Mobile-Pages
@@ -80,10 +99,24 @@ function mcw_init() {
 				MCW_PWA_LazyLoad::instance()->run();
 				MCW_PWA_Assets::instance()->run();
 				
+=======
+
+		// Disable some performance enhancement on AMP.
+		// Try to support AMP for WP plugin https://github.com/ahmedkaludi/Accelerated-Mobile-Pages.
+		// use AMPFORWP_AMP_QUERY_VAR.
+		if ( defined( 'AMP_QUERY_VAR' ) && ! get_query_var( AMP_QUERY_VAR, false ) ) {
+			MCW_PWA_LazyLoad::instance()->run();
+			MCW_PWA_Assets::instance()->run();
+>>>>>>> b293fb5359f015a3e604d9cf952b1ba32b51ba90
 		}
 	}
 
 	MCW_PWA_Monitor::instance()->run();
 }
 
+<<<<<<< HEAD
+=======
+add_action( 'parse_query', 'mcw_init' );
+
+>>>>>>> b293fb5359f015a3e604d9cf952b1ba32b51ba90
 

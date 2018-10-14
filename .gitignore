@@ -4,7 +4,6 @@
 # ignore OS generated files
 ehthumbs.db
 Thumbs.db
-.*
 
 # ignore Editor files
 *.sublime-project
@@ -36,6 +35,7 @@ Thumbs.db
 
 # ignore node/grunt dependency directories
 node_modules/
+scripts/node_modules/
 
 # ignore composer dependency directories
 vendor/
