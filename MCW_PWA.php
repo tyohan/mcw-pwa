@@ -85,7 +85,7 @@ function mcw_init() {
 		// Disable some performance enhancement on AMP.
 		// Try to support AMP for WP plugin https://github.com/ahmedkaludi/Accelerated-Mobile-Pages.
 		// use AMPFORWP_AMP_QUERY_VAR.
-		if ( defined( 'AMP_QUERY_VAR' ) && ! get_query_var( AMP_QUERY_VAR, false ) ) {
+		if ( !defined( 'AMP_QUERY_VAR' ) || ( defined( 'AMP_QUERY_VAR' ) && ! get_query_var( AMP_QUERY_VAR, false ) )) {
 			MCW_PWA_LazyLoad::instance()->run();
 			MCW_PWA_Assets::instance()->run();
 		}
