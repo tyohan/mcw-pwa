@@ -2,7 +2,7 @@
 Contributors: tyohan
 Tags: minimum config, PWA, Workbox, performance, lazy loading, Progressive Web App, Accelerator Mobile Page, AMP
 Requires at least: 4.6
-Tested up to: 4.9.1
+Tested up to: 5.0.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

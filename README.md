@@ -9,7 +9,8 @@ The plugin's current features:
 * make scripts loaded with async if no dependency found and defer if it has dependency like jQuery library. **This is a bit risky if themes or plugins not include the scripts with wp_enqueue_script function or not include dependency when they enqueue the script. Make sure you check there is no error on JavaScript console when you activate the plugin.**
 * install service worker on AMP page if the website has AMP plugin running. AMP is a custom elements library that boost the website loading performance.
 * add offline page to show when user offline. 
-* scan and set static URLs to precache
+* scan and set static URLs to precache with service worker.
+* preload your CSS and JavaScripts to boost performance.
 * Integrated loading performance monitoring with Google Analytics. If you have Google Analytics, it will track page load [user performance metric](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics) to your Google Analytics using [user timings report](https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings).
 
 ## To Develop
