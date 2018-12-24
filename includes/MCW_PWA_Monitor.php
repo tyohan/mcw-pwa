@@ -29,7 +29,7 @@ class MCW_PWA_Monitor extends MCW_PWA_Module {
         if(!is_admin()){
             add_action( 'wp_head', array( $this, 'addObserver' ), 0 );
             add_action( 'wp_print_footer_scripts', array( $this, 'addFooterScript' ), 99 );
-            wp_enqueue_script( 'tti_polyfill', MCW_PWA_URL . 'scripts/node_modules/tti-polyfill/tti-polyfill.js');
+            wp_enqueue_script( 'tti_polyfill', MCW_PWA_URL . 'scripts/node_modules/tti-polyfill/tti-polyfill.js',array(),MCW_PWA_VER);
         }
 	}
 

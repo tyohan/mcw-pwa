@@ -25,11 +25,13 @@ class MCW_PWA_Assets extends MCW_PWA_Module {
 
 	public function initScript() {
 		if ( ! is_admin() ) {
+			add_action('wp_head',array($this,'addPreload'), 1);
 			add_filter( 'script_loader_tag', array( $this, 'addDeferAsyncAttribute' ), 10, 2 );
 			// Remove WP Version From Styles
-			add_filter( 'style_loader_src', array( $this, 'removeVersion' ), 9999, 1 );
-			// Remove WP Version From Scripts
-			add_filter( 'script_loader_src', array( $this, 'removeVersion' ), 9999, 1 );
+			//add_filter( 'style_loader_src', array( $this, 'removeVersion' ), 9999, 1 );
+		
+			// // Remove WP Version From Scripts
+			// add_filter( 'script_loader_src', array( $this, 'removeVersion' ), 9999, 1 );
 
 						$this->disableEmojis();
 		}
@@ -55,6 +57,35 @@ class MCW_PWA_Assets extends MCW_PWA_Module {
 			MCW_PWA_SETTING_PAGE,
 			MCW_SECTION_PERFORMANCE
 		);
+	}
+
+	public function addPreload() {
+
+		global $wp_scripts,$wp_styles;
+		
+	
+		foreach($wp_scripts->queue as $handle) {
+			$script = $wp_scripts->registered[$handle];
+	
+			//-- Weird way to check if script is being enqueued in the footer.
+			if($script->extra['group'] === 1) {
+	
+				//-- If version is set, append to end of source.
+				$source = $script->src .'?ver='. ($script->ver ? "{$script->ver}" : get_bloginfo( 'version' ));
+	
+				//-- Spit out the tag.
+				echo "<link rel='preload' href='{$source}' as='script'/>\n";
+			}
+		}
+
+		
+		foreach($wp_styles->queue as $handle){
+			$style = $wp_styles->registered[$handle];
+			//-- If version is set, append to end of source.
+			$source = $style->src .'?ver='. ($style->ver ? "{$style->ver}" : get_bloginfo( 'version' ));
+			echo "<link rel='preload' href='{$source}' as='style'/>\n";
+		}
+
 	}
 
 	public function removeVersion( $src ) {

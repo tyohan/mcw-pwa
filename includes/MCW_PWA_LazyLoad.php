@@ -23,7 +23,7 @@ class MCW_PWA_LazyLoad extends MCW_PWA_Module {
 	public function initScript() {
 			add_action( 'wp_head', array( $this, 'addPolyfil' ), 999 );
 			$this->filterLazyLoadImages();
-			wp_enqueue_script( 'mcw_lazyload', MCW_PWA_URL . 'scripts/lazyload.js' );
+			wp_enqueue_script( 'mcw_lazyload', MCW_PWA_URL . 'scripts/lazyload.js',array(),MCW_PWA_VER );
 	}
 
 
@@ -108,7 +108,7 @@ class MCW_PWA_LazyLoad extends MCW_PWA_Module {
           <script>
           if (!(IntersectionObserver in window)) {
             let polyfil=document.createElement(\'script\');
-            polyfil.setAttribute(\'src\',\'' . MCW_PWA_URL . 'scripts/intersection-observer.js\');
+            polyfil.setAttribute(\'src\',\'' . MCW_PWA_URL . 'scripts/intersection-observer.js?ver='.MCW_PWA_VER.'\');
             document.head.appendChild(polyfil);
           }         
           </script>

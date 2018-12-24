@@ -4,7 +4,7 @@ Contributors: tyohan,ivankristianto
 Plugin Name:  Minimum Configuration WordPress PWA
 Plugin URI:   https://github.com/wp-id/mcw-pwa
 Description:  WordPress plugin to optimize loading performance with minimum configuration using PWA approach
-Version:      0.2.0
+Version:      0.2.1
 Author:       WP-ID
 Author URI:   https://wp-id.org
 License:      GPL2
@@ -29,6 +29,7 @@ along with Minimum Configuration WordPress PWA..
 defined( 'ABSPATH' ) or die( 'Nope, not accessing this' );
 define( 'MCW_PWA_URL', plugin_dir_url( __FILE__ ) );
 define( 'MCW_PWA_DIR', plugin_dir_path( __FILE__ ) );
+define( 'MCW_PWA_VER', '0.2.1' );
 define( 'MCW_PWA_OPTION', 'mcw_option_group' );
 define( 'MCW_SECTION_PERFORMANCE', 'mcw_option_performance' );
 define( 'MCW_SECTION_PWA', 'mcw_option_pwa' );
