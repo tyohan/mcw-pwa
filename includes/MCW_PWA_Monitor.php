@@ -30,6 +30,7 @@ class MCW_PWA_Monitor extends MCW_PWA_Module {
             add_action( 'wp_head', array( $this, 'addObserver' ), 0 );
             add_action( 'wp_print_footer_scripts', array( $this, 'addFooterScript' ), 99 );
             wp_enqueue_script( 'tti_polyfill', MCW_PWA_URL . 'scripts/node_modules/tti-polyfill/tti-polyfill.js',array(),MCW_PWA_VER);
+            wp_enqueue_script('tti_performance',MCW_PWA_URL . 'scripts/performance.js',array('tti_polyfill'),MCW_PWA_VER,true);
         }
 	}
 
@@ -90,31 +91,5 @@ class MCW_PWA_Monitor extends MCW_PWA_Module {
             }(); 
           </script>
           ';
-    }
-    
-    public function addFooterScript(){
-        echo '
-        <script>
-            ttiPolyfill.getFirstConsistentlyInteractive().then((tti) => {
-                const currentPage=document.querySelector("title").text;
-                //console.log(`TTI for ${currentPage}: ${tti/1000} s`);
-                _performanceMetrics.push({
-                    hitType: "timing",
-                    timingCategory: "Load Performance",
-                    timingLabel:currentPage,
-                    timingVar: "time-to-interactive",
-                    timingValue: tti
-                });
-
-                if(typeof ga !=="undefined"){
-                    _performanceMetrics.forEach((metric) =>{
-                        //console.log(`Time for ${metric.timingVar}  : ${metric.timingValue/1000}s`);
-                        ga("send", metric); 
-                    });
-                }
-                
-              });
-        </script>';
-        
     }
 }
