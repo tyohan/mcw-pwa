@@ -23,7 +23,7 @@ class MCW_PWA_LazyLoad extends MCW_PWA_Module {
 	public function initScript() {
 			add_action( 'wp_head', array( $this, 'addPolyfil' ), 999 );
 			$this->filterLazyLoadImages();
-			wp_enqueue_script( 'mcw_lazyload', MCW_PWA_URL . 'scripts/lazyload.js',array(),MCW_PWA_VER );
+			wp_enqueue_script( 'mcw_lazyload', MCW_PWA_URL . 'scripts/lazyload.js',array(),MCW_PWA_VER,true);
 	}
 
 

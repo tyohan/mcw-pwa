@@ -29,11 +29,12 @@ function onIntersection(entries) {
 function observeImage(){
     const images=document.getElementsByClassName('lazy-hidden');
     if (!('IntersectionObserver' in window)) {
+        console.log('load all image',image);
         Array.from(images).forEach(image => loadImages(image));
     } else {
         // It is supported, load the images through observer.
-        
         Array.from(images).forEach(image => {
+            console.log('observe image',image);
             observer.observe(image);
         });
     }
